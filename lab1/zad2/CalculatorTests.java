@@ -69,7 +69,7 @@ public class CalculatorTests {
 	@Test
 	public void subtractionTwoPositiveAndNegativeResultIsNegative() {
 		double result = calculator.sub(-23.531, 128.621);
-		assertEquals(-151.152, result, DELTA);
+		assertEquals(-152.152, result, DELTA);
 	}
 
 	@Test
