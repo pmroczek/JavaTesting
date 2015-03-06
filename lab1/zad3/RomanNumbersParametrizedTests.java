@@ -23,8 +23,11 @@ public class RomanNumbersParametrizedTests {
 	public static Collection<Object[]> data() {
 		return Arrays.asList(new Object[][] { { 1, "I" }, { 2, "II" },
 				{ 3, "III" }, { 4, "IV" }, { 5, "V" }, { 6, "VI" },
-				{ 7, "VII" }, { 9, "IX" }, { 58, "LVII" }, { 100, "C" },
-				{ 514, "DXIV" }, { 958, "CMLIII" }, { 3999, "MMMCMXCIX" } });
+				{ 7, "VII" }, { 9, "IX" }, { 49, "XLIX" }, { 58, "LVIII" },
+				{ 99, "XCIX" }, { 100, "C" }, { 256, "CCLVI" },
+				{ 514, "DXIV" }, { 958, "CMLVIII" }, { 1543, "MDXLIII" },
+				{ 1897, "MDCCCXCVII" }, { 2167, "MMCLXVII" },
+				{ 3548, "MMMDXLVIII" }, { 3999, "MMMCMXCIX" } });
 	}
 
 	@Test
