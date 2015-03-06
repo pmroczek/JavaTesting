@@ -1,238 +1,177 @@
 package zad1;
 
-import static org.junit.Assert.*;
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 public class CalculatorTests {
 
+	Calculator calculator;
+
+	@Before
+	public void setUp() {
+		calculator = new Calculator();
+	}
+
 	@Test
 	public void addingTwoZeros() {
-		Calculator calculator = new Calculator();
-		int result = calculator.add(0, 0);
-		assertEquals(0, result);
+		assertEquals(0, calculator.add(0, 0));
 	}
 
 	@Test
 	public void addingTwoPositiveNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.add(127, 13);
-		assertEquals(140, result);
+		assertEquals(140, calculator.add(127, 13));
 	}
 
 	@Test
 	public void addingTwoPositiveAndNegativeResultIsPositive() {
-		Calculator calculator = new Calculator();
-		int result = calculator.add(123, -28);
-		assertEquals(95, result);
+		assertEquals(95, calculator.add(123, -28));
 	}
 
 	@Test
 	public void addingTwoPositiveAndNegativeResultIsNegative() {
-		Calculator calculator = new Calculator();
-		int result = calculator.add(23, -128);
-		assertEquals(-105, result);
+		assertEquals(-105, calculator.add(23, -128));
 	}
 
 	@Test
 	public void addingTwoNegativeNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.add(-247, -119);
-		assertEquals(-366, result);
+		assertEquals(-366, calculator.add(-247, -119));
 	}
 
 	// subtraction
 	@Test
 	public void subtractionTwoZeros() {
-		Calculator calculator = new Calculator();
-		int result = calculator.sub(0, 0);
-		assertEquals(0, result);
+		assertEquals(0, calculator.sub(0, 0));
 	}
 
 	@Test
 	public void subtractionTwoPositiveNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.sub(12, 131);
-		assertEquals(-119, result);
+		assertEquals(-119, calculator.sub(12, 131));
 	}
 
 	@Test
 	public void subtractionTwoPositiveAndNegativeResultIsPositive() {
-		Calculator calculator = new Calculator();
-		int result = calculator.sub(15, -24);
-		assertEquals(39, result);
+		assertEquals(39, calculator.sub(15, -24));
 	}
 
 	@Test
 	public void subtractionTwoPositiveAndNegativeResultIsNegative() {
-		Calculator calculator = new Calculator();
-		int result = calculator.sub(-23, 128);
-		assertEquals(-151, result);
+		assertEquals(-151, calculator.sub(-23, 128));
 	}
 
 	@Test
 	public void subtractionTwoNegativeNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.sub(-247, -119);
-		assertEquals(-128, result);
+		assertEquals(-128, calculator.sub(-247, -119));
 	}
 
 	// multiplication
 	@Test
 	public void multiplicationTwoZeros() {
-		Calculator calculator = new Calculator();
-		int result = calculator.multi(0, 0);
-		assertEquals(0, result);
+		assertEquals(0, calculator.multi(0, 0));
 	}
 
 	@Test
 	public void multiplicationTwoPositiveNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.multi(11, 13);
-		assertEquals(143, result);
+		assertEquals(143, calculator.multi(11, 13));
 	}
 
 	@Test
 	public void multiplicationTwoPositiveAndNegativeResultIsPositive() {
-		Calculator calculator = new Calculator();
-		int result = calculator.multi(12, -53);
-		assertEquals(-636, result);
+		assertEquals(-636, calculator.multi(12, -53));
 	}
 
 	@Test
 	public void multiplicationTwoNegativeAndPositiveResultIsNegative() {
-		Calculator calculator = new Calculator();
-		int result = calculator.multi(-42, 15);
-		assertEquals(-630, result);
+		assertEquals(-630, calculator.multi(-42, 15));
 	}
 
 	@Test
 	public void multiplicationTwoNegativeNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.multi(-24, -11);
-		assertEquals(264, result);
+		assertEquals(264, calculator.multi(-24, -11));
 	}
 
 	// division
 	@Test(expected = ArithmeticException.class)
 	public void divisionTwoZeros() {
-		Calculator calculator = new Calculator();
 		calculator.div(0, 0);
 	}
 
 	@Test(expected = ArithmeticException.class)
 	public void divisionPositiveByZero() {
-		Calculator calculator = new Calculator();
 		calculator.div(12, 0);
 	}
 
 	@Test(expected = ArithmeticException.class)
 	public void divisionNegativeByZero() {
-		Calculator calculator = new Calculator();
 		calculator.div(-18, 0);
 	}
 
 	@Test
 	public void divisionZeroByPositive() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(0, 18);
-		assertEquals(0, result);
+		assertEquals(0, calculator.div(0, 18));
 	}
 
 	@Test
 	public void divisionZeroByNagative() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(0, -18);
-		assertEquals(0, result);
+		assertEquals(0, calculator.div(0, -18));
 	}
 
 	@Test
 	public void divisionTwoPositiveNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(244, 22);
-		assertEquals(11, result);
+		assertEquals(11, calculator.div(244, 22));
 	}
 
 	@Test
 	public void divisionPositiveAndNegativeResultIsPositive() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(12, -53);
-		assertEquals(0, result);
+		assertEquals(0, calculator.div(12, -53));
 	}
 
 	@Test
 	public void divisionNegativeAndPositiveResultIsNegative() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(-49, 15);
-		assertEquals(-3, result);
+		assertEquals(-3, calculator.div(-49, 15));
 	}
 
 	@Test
 	public void divisionTwoNegativeNumbers() {
-		Calculator calculator = new Calculator();
-		int result = calculator.div(-24, -11);
-		assertEquals(2, result);
+		assertEquals(2, calculator.div(-24, -11));
 	}
 
 	// greater
 	@Test
 	public void gratherTwoZeros() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(0, 0);
-		assertFalse(result);
+		assertFalse(calculator.greater(0, 0));
 	}
 
 	@Test
 	public void gratherTwoPositiveNumbersResultTrue() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(12, 0);
-		assertTrue(result);
+		assertTrue(calculator.greater(12, 0));
 	}
 
 	@Test
 	public void gratherTwoPositiveNumbersResultFalse() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(31, 32);
-		assertFalse(result);
+		assertFalse(calculator.greater(31, 32));
 	}
 
 	@Test
 	public void gratherTwoSamePositiveNumbersResultFalse() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(31, 31);
-		assertFalse(result);
+		assertFalse(calculator.greater(31, 31));
 	}
 
 	@Test
 	public void gratherTwoNegativeNumbersResultTrue() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(-7, -12);
-		assertTrue(result);
+		assertTrue(calculator.greater(-7, -12));
 	}
 
 	@Test
 	public void gratherTwoNegativeNumbersResultFalse() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(-4, -3);
-		assertFalse(result);
+		assertFalse(calculator.greater(-4, -3));
 	}
 
 	@Test
 	public void gratherTwoSameNegativeNumbersResultFalse() {
-		Calculator calculator = new Calculator();
-		boolean result = calculator.greater(-12, -12);
-		assertFalse(result);
+		assertFalse(calculator.greater(-12, -12));
 	}
-
-	/*
-	 * @Test public void addingTwoExtremeValues() { int a = -2147483648; int b =
-	 * Integer.MAX_VALUE; a = a - 1; b = b + 1;
-	 * System.out.println(Integer.MAX_VALUE); System.out.println(b);
-	 * System.out.println(a); Calculator calculator = new Calculator(); int
-	 * result = calculator.add(-247, -119); assertEquals(-366, result);
-	 * 
-	 * }
-	 */
 }
