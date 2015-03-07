@@ -11,9 +11,9 @@ public class PsikusImpl implements Psikus {
 		if (hasOnlyOneDigit(charsNumber, liczba))
 			return null;
 
-		int indexToRemove = GetRandomIndex(charsNumber.length(), liczba < 0);
+		int indexToRemove = getRandomIndex(charsNumber.length(), liczba < 0);
 
-		return ConvertStringToInt(deleteChar(charsNumber, indexToRemove,
+		return convertStringToInt(deleteChar(charsNumber, indexToRemove,
 				liczba < 0));
 	}
 
@@ -24,16 +24,21 @@ public class PsikusImpl implements Psikus {
 		if (hasOnlyOneDigit(charsNumber, liczba))
 			throw new NieudanyPsikusException();
 
-		int[] indexes = GetRandomIndexes(charsNumber.length(), liczba < 0);
+		int[] indexes = getRandomIndexes(charsNumber.length(), liczba < 0);
 
-		return ConvertStringToInt(ReplaceDigits(charsNumber, indexes,
+		return convertStringToInt(ReplaceDigits(charsNumber, indexes,
 				liczba < 0));
 	}
 
 	@Override
 	public Integer nieksztaltek(Integer liczba) {
-		// TODO Auto-generated method stub
-		return null;
+		String number = liczba.toString();
+		if (number.contains("3") || number.contains("6")
+				|| number.contains("7")) {
+			return convertStringToInt(getRandomAndReplace(number));
+		}
+
+		return liczba;
 	}
 
 	private boolean hasOnlyOneDigit(StringBuilder charsNumber, Integer liczba) {
@@ -41,20 +46,51 @@ public class PsikusImpl implements Psikus {
 				|| (liczba < 0 && charsNumber.length() == MinNumberLenWithMinusSign);
 	}
 
-	private int[] GetRandomIndexes(int length, boolean isNegativeNumber) {
+	private int[] getRandomIndexes(int length, boolean isNegativeNumber) {
 		int[] indexes = new int[2];
 
 		do {
-			indexes[0] = GetRandomIndex(length, isNegativeNumber);
-			indexes[1] = GetRandomIndex(length, isNegativeNumber);
+			indexes[0] = getRandomIndex(length, isNegativeNumber);
+			indexes[1] = getRandomIndex(length, isNegativeNumber);
 		} while (indexes[0] == indexes[1]);
 
 		return indexes;
 	}
 
-	private int GetRandomIndex(int range, boolean isNegativeNumer) {
+	private int getRandomIndex(int range, boolean isNegativeNumer) {
 		Random random = new Random();
 		return random.nextInt(isNegativeNumer ? range - 1 : range);
+	}
+
+	private String getRandomAndReplace(String number) {
+		StringBuilder charsNumber = new StringBuilder(number);
+		Random random = new Random();
+		int range = charsNumber.length();
+		char randomedChar;
+		int index;
+
+		do {
+			index = random.nextInt(range);
+			randomedChar = charsNumber.charAt(index);
+		} while ((randomedChar != '3' && randomedChar != '6' && randomedChar != '7')
+				|| randomedChar == '-');
+
+		charsNumber.replace(index, index + 1, GetReplaceString(randomedChar));
+
+		return charsNumber.toString();
+	}
+
+	private String GetReplaceString(char randomedChar) {
+		switch (randomedChar) {
+		case '3':
+			return "8";
+		case '6':
+			return "9";
+		case '7':
+			return "1";
+		}
+
+		return null;
 	}
 
 	private String deleteChar(StringBuilder charsNumber, int indexToRemove,
@@ -88,7 +124,7 @@ public class PsikusImpl implements Psikus {
 		return charsNumber.toString();
 	}
 
-	private Integer ConvertStringToInt(String number) {
+	private Integer convertStringToInt(String number) {
 		return Integer.valueOf(number);
 	}
 }

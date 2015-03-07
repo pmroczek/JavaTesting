@@ -131,4 +131,84 @@ public abstract class PsikusTest {
 			fail("No exception expected while cyfrkrad working!");
 		}
 	}
+
+	// nieksztaltek
+	@Test
+	public final void nieksztaltekReplaceThree() {
+		assertEquals(new Integer(9418), psikus.nieksztaltek(9413));
+	}
+
+	@Test
+	public final void nieksztaltekReplace() {
+		assertEquals(new Integer(8592), psikus.nieksztaltek(8562));
+	}
+
+	@Test
+	public final void nieksztaltekReplaceSeven() {
+		assertEquals(new Integer(2411), psikus.nieksztaltek(2417));
+	}
+
+	@Test
+	public final void nieksztaltekNoReplaceNotExistsNeededNumbers() {
+		assertEquals(new Integer(124589), psikus.nieksztaltek(124589));
+	}
+
+	@Test
+	public final void nieksztaltekRadomReplace() {
+		assertThat(psikus.nieksztaltek(124589).toString(), CoreMatchers.anyOf(
+				CoreMatchers.containsString("8"),
+				CoreMatchers.containsString("9")));
+	}
+
+	@Test
+	public final void nieksztaltekRadomReplaceFromAllDigits() {
+		assertThat(psikus.nieksztaltek(7124589).toString(), CoreMatchers.anyOf(
+				CoreMatchers.containsString("1"),
+				CoreMatchers.containsString("8"),
+				CoreMatchers.containsString("9")));
+	}
+	
+	@Test
+	public final void nieksztaltekReplaceThreeNegativNumbers() {
+		assertEquals(new Integer(9418), psikus.nieksztaltek(9413));
+	}
+
+	@Test
+	public final void nieksztaltekReplaceNegativNumbers() {
+		assertEquals(new Integer(8592), psikus.nieksztaltek(8562));
+	}
+
+	@Test
+	public final void nieksztaltekReplaceSevenNegativNumbers() {
+		assertEquals(new Integer(2411), psikus.nieksztaltek(2417));
+	}
+
+	@Test
+	public final void nieksztaltekNegativeNoReplaceNotExistsNeededNumbers() {
+		assertEquals(new Integer(124589), psikus.nieksztaltek(124589));
+	}
+
+	@Test
+	public final void nieksztaltekRadomReplaceNegativNumbers() {
+		assertThat(psikus.nieksztaltek(124589).toString(), CoreMatchers.anyOf(
+				CoreMatchers.containsString("8"),
+				CoreMatchers.containsString("9")));
+	}
+
+	@Test
+	public final void nieksztaltekRadomReplaceFromAllDigitsNegativNumbers() {
+		assertThat(psikus.nieksztaltek(7124589).toString(), CoreMatchers.anyOf(
+				CoreMatchers.containsString("1"),
+				CoreMatchers.containsString("8"),
+				CoreMatchers.containsString("9")));
+	}
+
+	@Test
+	public final void nieksztaltekNoExeptionExpected() {
+		try {
+			psikus.nieksztaltek(65247822);
+		} catch (Exception e) {
+			fail("No exception expected while cyfrkrad working!");
+		}
+	}
 }
