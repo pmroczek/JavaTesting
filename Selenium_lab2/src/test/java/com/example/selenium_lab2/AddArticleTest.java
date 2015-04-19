@@ -10,8 +10,16 @@ import com.github.mirreck.FakeFactory;
 
 public class AddArticleTest extends Configuration {
 
+	@Before
+	public void Login() {
+		driver.findElement(By.linkText("Login")).click();
+		driver.findElement(By.id("email")).sendKeys("pmroczek@outlook.com");
+		driver.findElement(By.id("password")).sendKeys("123");
+		driver.findElement(By.name("commit")).click();
+	}
+
 	@Test
-	public void Success_add_new_article() {
+	public void success_add_new_article() {
 		driver.findElement(By.linkText("Add new article")).click();
 		FakeFactory factory = new FakeFactory();
 		String title = factory.paragraph();
@@ -26,6 +34,50 @@ public class AddArticleTest extends Configuration {
 						.getText());
 		Assert.assertEquals(content,
 				driver.findElement(By.xpath("html/body/div[2]/p")).getText());
+	}
+
+	@Test
+	public void new_article_is_displayed_on_user_dashboard() {
+		driver.findElement(By.linkText("Add new article")).click();
+		FakeFactory factory = new FakeFactory();
+		String title = factory.paragraph();
+		String content = factory.paragraph(10);
+
+		driver.findElement(By.id("article_title")).sendKeys(title);
+		driver.findElement(By.id("article_text")).sendKeys(content);
+		driver.findElement(By.name("commit")).click();
+		driver.findElement(By.xpath("html/body/div[1]/div/div[2]/ul/li[2]/a"))
+				.click();
+
+		Assert.assertTrue(driver.findElement(
+				By.xpath("//td[contains(text(), \"" + title + "\")]"))
+				.isDisplayed());
+	}
+
+	@Test
+	public void edit_article_displayed_new_title() {
+		driver.findElement(By.linkText("Add new article")).click();
+		FakeFactory factory = new FakeFactory();
+		String title = factory.paragraph();
+		String content = factory.paragraph(10);
+
+		// Add new article
+		driver.findElement(By.id("article_title")).sendKeys(title);
+		driver.findElement(By.id("article_text")).sendKeys(content);
+		driver.findElement(By.name("commit")).click();
+		driver.findElement(By.xpath("html/body/div[1]/div/div[2]/ul/li[2]/a"))
+				.click();
+		driver.findElement(
+				By.xpath("//td[contains(text(), \"" + title
+						+ "\")]/following::a[1]")).click();
+
+		title = factory.paragraph();
+		driver.findElement(By.id("article_title")).sendKeys(title);
+		driver.findElement(By.name("commit")).click();
+
+		Assert.assertTrue(driver.findElement(
+				By.xpath("//td[contains(text(), \"" + title + "\")]"))
+				.isDisplayed());
 	}
 
 	@Test
@@ -111,14 +163,6 @@ public class AddArticleTest extends Configuration {
 				driver.findElement(
 						By.xpath(".//*[@id='error_explanation']/ul/li[3]/p"))
 						.getText());
-	}
-
-	@Before
-	public void Login() {
-		driver.findElement(By.linkText("Login")).click();
-		driver.findElement(By.id("email")).sendKeys("pmroczek@outlook.com");
-		driver.findElement(By.id("password")).sendKeys("123");
-		driver.findElement(By.name("commit")).click();
 	}
 
 	@After
