@@ -2,26 +2,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>Selenium_lab1</artifactId>
+	<artifactId>Selenium_lab2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.jbehave</groupId>
-			<artifactId>jbehave-core</artifactId>
-			<version>4.0-beta-11</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jbehave.web</groupId>
-			<artifactId>jbehave-web-selenium</artifactId>
-			<version>3.6-beta-2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.45.0</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.fluttercode.datafactory</groupId>
+    		<artifactId>datafactory</artifactId>
+    		<version>0.8</version>
+		    <type>jar</type>
+    	</dependency>
+    	<dependency>
+    		<groupId>com.github.mirreck</groupId>
+    		<artifactId>java-fake-factory</artifactId>
+   	 		<version>1.0.2</version>
+		</dependency>		
 	</dependencies>
 </project>
