@@ -1,14 +1,18 @@
 package com.example.selenium_lab2;
 
+import javax.security.auth.Destroyable;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.github.mirreck.FakeFactory;
 
-public class AddArticleTest extends Configuration {
+public class ArticlesTest extends Configuration {
 
 	@Before
 	public void Login() {
@@ -143,7 +147,6 @@ public class AddArticleTest extends Configuration {
 	@Test
 	public void add_new_article_no_fill_form_return_message() {
 		driver.findElement(By.linkText("Add new article")).click();
-
 		driver.findElement(By.name("commit")).click();
 
 		Assert.assertEquals(
@@ -163,6 +166,32 @@ public class AddArticleTest extends Configuration {
 				driver.findElement(
 						By.xpath(".//*[@id='error_explanation']/ul/li[3]/p"))
 						.getText());
+	}
+
+	@Test
+	public void destroy_new_added_article() {
+		driver.findElement(By.linkText("Add new article")).click();
+		FakeFactory factory = new FakeFactory();
+		String title = factory.paragraph();
+		String content = factory.paragraph(10);
+
+		// Add new article
+		driver.findElement(By.id("article_title")).sendKeys(title);
+		driver.findElement(By.id("article_text")).sendKeys(content);
+		driver.findElement(By.name("commit")).click();
+		driver.findElement(By.xpath("html/body/div[1]/div/div[2]/ul/li[2]/a"))
+				.click();
+		driver.findElement(
+				By.xpath("//td[contains(text(), \"" + title
+						+ "\")]/following::a[2]")).click();
+
+		try {
+			driver.findElement(By.xpath("//td[contains(text(), \"" + title
+					+ "\")]"));
+
+			Assert.fail("Article isn't delete!");
+		} catch (Exception ex) {
+		}
 	}
 
 	@After
