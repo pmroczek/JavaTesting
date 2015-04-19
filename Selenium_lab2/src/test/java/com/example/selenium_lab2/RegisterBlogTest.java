@@ -12,10 +12,6 @@ import com.github.mirreck.FakeFactory;
 
 public class RegisterBlogTest extends Configuration {
 
-	public RegisterBlogTest() {
-		super();
-	}
-
 	@Test
 	public void go_to_register_page() {
 		driver.findElement(By.xpath("html/body/div[1]/div/div[2]/ul/li[2]/a")).click();

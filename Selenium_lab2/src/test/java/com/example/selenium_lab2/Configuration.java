@@ -11,13 +11,11 @@ public class Configuration {
 
 	public WebDriver driver;
 
-	public Configuration() {
-		System.setProperty("webdriver.chrome.driver",
-				"c:\\tmp\\chromedriver.exe");
-	}
-
 	@Before
 	public void GoToHomePage() {
+		System.setProperty("webdriver.chrome.driver",
+				"c:\\tmp\\chromedriver.exe");
+
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("http://blogpmroczek.herokuapp.com");
