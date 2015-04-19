@@ -25,7 +25,6 @@ public class Configuration {
 
 	@After
 	public void CloseDriver() {
-		System.out.println("Closing driver");
 		driver.close();
 	}
 }
